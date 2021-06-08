@@ -24,13 +24,17 @@ int AI::calculate(const Board & b) const{
         return 0;
 }
 int AI::minimax(Board & b, int depth, int alpha, int beta, bool is_max) const{
-    int score=this->calculate(b);
-    if(score==1||score==-1)//W przypadku wygranej bądź przegranej
+    int score=(MAX_DEPTH-depth)*this->calculate(b);
+    //W przypadku wygranej bądź przegranej
+    if(this->check_win(b,this->get_symbol()))
+        return score;
+    if(this->check_win(b,-this->get_symbol()))
         return score;
     if(this->is_over(b))//W przypadku zakończonej gry
         return 0;
     //Gdy osiągniemy maksymalną liczbę ruchów, zwracamy wartości najlepsze dla poszczególnych graczy max/min
     if(depth==MAX_DEPTH){
+        //return this->calculate(b);
         if(is_max)
             return 1;
         else
@@ -70,16 +74,12 @@ int AI::minimax(Board & b, int depth, int alpha, int beta, bool is_max) const{
     }
 }
 int * AI::best_move(Board & b) const{
-    const int moves_left=this->valid_moves_left(b);//Liczba pozostałych ruchów
-    int moves_checked=0;//Ilość wykonanych ruchów
     int best_move=_INF;//Ustawiamy najgorszy przypadek
     int move_val;//Wartość ruchu
     int *move = new int[2];
-    //Poszukujemy najlepszego ruchu
     for (int i = 0; i < b.get_board_size(); i++){
         for (int j = 0; j < b.get_board_size(); j++){
             if(b(i,j).get_symbol()==0){
-                moves_checked++;
                 b.set_element(this->get_symbol(),i,j);
                 move_val=this->minimax(b,0,_INF,INF,false);
                 b.set_element(0,i,j);
@@ -91,20 +91,5 @@ int * AI::best_move(Board & b) const{
             }
         }
     }
-    //Jeżeli wszystkie ruchy prowadzą do przegranej, rozgrywka będzie przedłużana tak jak się da (z nadzieją, że gracz popełni błąd)
-    if(moves_checked==moves_left&&move_val==-1){
-        for (int i = 0; i < b.get_board_size(); i++){
-            for (int j = 0; j < b.get_board_size(); j++){
-                if(b(i,j).get_symbol()==0){
-                    b.set_element(-this->get_symbol(),i,j);
-                    if(this->check_win(b,-this->get_symbol())){
-                        move[0]=i;
-                        move[1]=j;
-                    }
-                    b.set_element(0,i,j);
-                    }
-                }
-            }
-        }
     return move;
-    }
+}

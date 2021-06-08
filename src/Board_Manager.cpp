@@ -86,7 +86,7 @@ void Board_Manager::move(Board & b, int s, int r, int c) const {
         throw invalid_move_error();
 }
 int Board_Manager::valid_moves_left(const Board & b) const {
-    int moves_left;
+    int moves_left=0;
     for (int i = 0; i < b.get_board_size(); i++){
         for (int j = 0; j < b.get_board_size(); j++){
             if(b(i,j).get_symbol()==0)

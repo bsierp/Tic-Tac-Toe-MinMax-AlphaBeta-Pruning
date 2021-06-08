@@ -29,7 +29,7 @@ int main(){
         else if(temp1==1){
             std::string ans="";
             while(!done){
-                std::cout<<"Chcesz zacząć (t/n)?";
+                std::cout<<"Chcesz zacząć (t/n)?"<<std::endl;
                 std::cin>>ans;
                 if(ans=="t"){
                     players.push_back(std::unique_ptr<Player>(new Human_Player(1)));
