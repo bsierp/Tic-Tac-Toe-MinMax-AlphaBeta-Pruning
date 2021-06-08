@@ -1,3 +1,8 @@
+/**
+ * @file Board_Manager.cpp
+ * @brief Plik zawiera definicje metod klasy Board_Manager
+ * 
+ */
 #include "Board_Manager.hh"
 
 bool Board_Manager::check_row(const Board & b, int s) const{
@@ -79,4 +84,14 @@ void Board_Manager::move(Board & b, int s, int r, int c) const {
         b.set_element(s,r,c);
     else
         throw invalid_move_error();
+}
+int Board_Manager::valid_moves_left(const Board & b) const {
+    int moves_left;
+    for (int i = 0; i < b.get_board_size(); i++){
+        for (int j = 0; j < b.get_board_size(); j++){
+            if(b(i,j).get_symbol()==0)
+                moves_left++;
+        }
+    }
+    return moves_left;
 }

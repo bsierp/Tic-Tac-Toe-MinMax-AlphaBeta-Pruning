@@ -34,7 +34,7 @@ class Tile{
      */
     Tile(const int & s){symbol=static_cast<Tile_Val>(s);};
     /**
-     * @brief Zwraca symbol znajdujący się w polu
+     * @brief Zwraca symbol znajdujący się w polu w postaci ciągu znakowego
      * 
      * @return std::string - symbol znajdujący się w polu w postaci tekstowej
      */

@@ -1,3 +1,8 @@
+/**
+ * @file Board.cpp
+ * @brief Plik zawiera definicje metod klasy Board
+ * 
+ */
 #include "Board.hh"
 
 Board::Board(int size, int win){
@@ -29,8 +34,15 @@ const Tile & Board::operator()(int r, int c) const{
         return this->tiles[r][c];
 }
 std::string Board::ret_board() const {
-    std::string board="";
+    std::string board="   ";
     for (int i = 0; i < this->get_board_size(); i++){
+        board+=std::to_string(i+1);
+        board+=".";
+    }
+    board+="\n";
+    for (int i = 0; i < this->get_board_size(); i++){
+        board+=std::to_string(1+i);
+        board+=". ";
         for (int j = 0; j < this->get_board_size(); j++){
             board+=(*this)(i,j).ret_tile_symbol();
             board+="|";

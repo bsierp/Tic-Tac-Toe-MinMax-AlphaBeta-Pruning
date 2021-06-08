@@ -8,15 +8,27 @@
  * @brief Definicja prostego wyjątku niewłaściwego ruchu
  * 
  */
-struct invalid_move_error : public std::exception
-{
+struct invalid_move_error : public std::exception{
     /**
      * @brief Zwraca wiadomość błędu
      * 
      * @return const char* - wiadomość błędu
      */
-	const char * what () const throw ()
-    {
+	const char * what () const throw (){
     	return "Niewłaściwy ruch";
+    }
+};
+/**
+ * @brief Definicja prostego wyjątku niewłaściwego symbolu
+ * 
+ */
+struct invalid_symbol_error : public std::exception{
+    /**
+     * @brief Zwraca wiadomość błędu
+     * 
+     * @return const char* - wiadomość błędu
+     */
+    const char * what () const throw (){
+        return "Niewłaściwa wartość symbolu";
     }
 };
