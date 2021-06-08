@@ -1,0 +1,8 @@
+.vscode/settings.json
+obj/AI.o
+obj/Board_Manager.o
+obj/Board.o
+obj/Human_Player.o
+obj/main.o
+obj/Tile.o
+Tic_Tac_Toe
